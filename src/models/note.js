@@ -14,7 +14,7 @@ const noteSchema = new mongoose.Schema(
     },
   },
   {
-    // Data 자료형으로 createAt, updateAt 필드 할당
+    // Date 자료형으로 createAt, updateAt 필드 할당
     timestamps: true,
   },
 );
