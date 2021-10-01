@@ -61,4 +61,28 @@ module.exports = {
       throw new Error('Error creating account');
     }
   },
+  signIn: async (parent, { username, email, password }, { models }) => {
+    if (email) {
+      // 이메일 주소 스트링 처리
+      email = email.trim().toLowerCase();
+    }
+
+    const user = await models.User.findOne({
+      $or: [{ email }, { username }],
+    });
+
+    // 사용자를 찾지 못하면 인증 에러 던지기
+    if (!user) {
+      throw new AuthenticationError('Error signing in');
+    }
+
+    // 비밀번호가 불일치하면 인증 에러 던지기
+    const valid = await bcrypt.compare(password, user.password);
+    if (!valid) {
+      throw new AuthenticationError('Error signing in');
+    }
+
+    // JWT 생성 및 반환
+    return jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+  },
 };
