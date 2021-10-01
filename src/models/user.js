@@ -1,16 +1,25 @@
 // 몽구스 라이브러리 요청
 const mongoose = require('mongoose');
 
-// 노트의 DB 스키마 정의
-const NoteSchema = new mongoose.Schema(
+// 사용자 DB 스키마 정의
+const UserSchema = new mongoose.Schema(
   {
-    content: {
+    username: {
+      type: String,
+      required: true,
+      index: { unique: true },
+    },
+    email: {
+      type: String,
+      required: true,
+      index: { unique: true },
+    },
+    password: {
       type: String,
       required: true,
     },
-    author: {
+    avatar: {
       type: String,
-      required: true,
     },
   },
   {
@@ -20,6 +29,6 @@ const NoteSchema = new mongoose.Schema(
 );
 
 // 스키마와 함께 'Note' 모델 정의
-const Note = mongoose.model('Note', NoteSchema);
+const User = mongoose.model('User', UserSchema);
 // 모듈 익스포트
-module.exports = Note;
+module.exports = User;
