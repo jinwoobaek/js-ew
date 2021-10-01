@@ -6,5 +6,3 @@ module.exports = {
     });
   },
 };
-
-//git test
