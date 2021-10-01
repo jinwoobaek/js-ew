@@ -21,9 +21,6 @@ const UserSchema = new mongoose.Schema(
     avatar: {
       type: String,
     },
-    test: {
-      type: String,
-    },
   },
   {
     // Date 자료형으로 createAt, updateAt 필드 할당
